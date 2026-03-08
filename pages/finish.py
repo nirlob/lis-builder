@@ -17,8 +17,8 @@ class FinishPage(Gtk.Box):
         
         # Espaciador superior
         spacer_top = Gtk.Box()
+        spacer_top.set_vexpand(True)
         self.append(spacer_top)
-        self.set_child_packing(spacer_top, True, True, 0, Gtk.PackType.START)
         
         # Icono de éxito (usando emoji)
         success_label = Gtk.Label()
@@ -48,8 +48,8 @@ class FinishPage(Gtk.Box):
         
         # Espaciador inferior
         spacer_bottom = Gtk.Box()
+        spacer_bottom.set_vexpand(True)
         self.append(spacer_bottom)
-        self.set_child_packing(spacer_bottom, True, True, 0, Gtk.PackType.START)
         
         # Botón de finalización
         finish_button = Gtk.Button(label="Finalizar")

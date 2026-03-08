@@ -64,5 +64,5 @@ class DirectoriesPage(Gtk.Box):
         
         # Espaciador
         spacer = Gtk.Box()
+        spacer.set_vexpand(True)
         self.append(spacer)
-        self.set_child_packing(spacer, True, True, 0, Gtk.PackType.START)
