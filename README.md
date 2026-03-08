@@ -47,18 +47,31 @@ venv\Scripts\activate.bat
 pip install -r requirements.txt
 ```
 
-### Ejecutar y Depurar
+### Ejecutar desde VSCode
 
-Una vez configurado el entorno, abre VSCode y presiona **F5** para ejecutar y depurar automáticamente.
-
-- **F5**: Ejecutar y depurar
-- **Ctrl+Shift+D**: Abrir panel de depuración
-- **Clicks en número de línea**: Poner breakpoints
+Presiona **F5** para ejecutar y depurar automáticamente (funciona en cualquier SO).
 
 VSCode automáticamente:
-- ✅ Detecta el venv en cualquier SO
-- ✅ Activa el entorno automáticamente
-- ✅ Ejecuta la aplicación en modo depuración
+- ✅ Detecta el venv
+- ✅ Ejecuta mediante `launcher.py` (compatible con Windows, macOS y Linux)
+- ✅ Abre en modo depuración
+
+### Ejecutar manualmente desde terminal
+
+**macOS/Linux:**
+```bash
+./run.sh
+```
+
+**Windows (CMD):**
+```cmd
+run.bat
+```
+
+**Windows (PowerShell):**
+```powershell
+.\run.bat
+```
 
 ## Características
 
@@ -76,9 +89,16 @@ VSCode automáticamente:
 ```
 lis-builder/
 ├── main.py              # Aplicación principal
-├── requirements.txt     # Dependencias
+├── launcher.py          # Script universal para ejecutar en todos los SO
+├── run.sh              # Script para ejecutar en macOS/Linux
+├── run.bat             # Script para ejecutar en Windows
+├── requirements.txt    # Dependencias
 ├── README.md           # Este archivo
 ├── .gitignore          # Archivos a ignorar en Git
+├── .vscode/
+│   ├── launch.json     # Configuración de depuración VSCode
+│   ├── tasks.json      # Tareas opcionales de VSCode
+│   └── settings.json   # Configuración del proyecto
 └── pages/              # Módulo de páginas
     ├── __init__.py
     ├── presentation.py  # Página de presentación
