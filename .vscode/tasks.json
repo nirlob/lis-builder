@@ -1,0 +1,62 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run LIS Builder",
+            "type": "shell",
+            "command": "${workspaceFolder}/run.sh",
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Debug LIS Builder",
+            "type": "shell",
+            "command": "source",
+            "args": [
+                "${workspaceFolder}/venv/bin/activate",
+                "&&",
+                "python3",
+                "-m",
+                "pdb",
+                "${workspaceFolder}/main.py"
+            ],
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Install Dependencies",
+            "type": "shell",
+            "command": "source",
+            "args": [
+                "${workspaceFolder}/venv/bin/activate",
+                "&&",
+                "pip",
+                "install",
+                "-r",
+                "requirements.txt"
+            ],
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            }
+        }
+    ]
+}
