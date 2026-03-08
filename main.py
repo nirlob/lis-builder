@@ -7,12 +7,12 @@ import gi
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gio
 
-from pages.presentation import PresentationPage
-from pages.license import LicensePage
-from pages.administrator import AdministratorPage
-from pages.directories import DirectoriesPage
-from pages.options import OptionsPage
-from pages.finish import FinishPage
+from pages.home import HomePage
+from pages.files import FilesPage
+from pages.settings import SettingsPage
+from pages.installer import InstallerPage
+from pages.advanced import AdvancedPage
+from pages.build import BuildPage
 
 
 class MainWindow(Gtk.ApplicationWindow):
@@ -54,12 +54,12 @@ class MainWindow(Gtk.ApplicationWindow):
         self.stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
         
         # Agregar las páginas al stack
-        self.stack.add_titled(PresentationPage(), "presentation", "Presentation")
-        self.stack.add_titled(LicensePage(), "license", "License")
-        self.stack.add_titled(AdministratorPage(), "administrator", "Administrator")
-        self.stack.add_titled(DirectoriesPage(), "directories", "Directories")
-        self.stack.add_titled(OptionsPage(), "options", "Options")
-        self.stack.add_titled(FinishPage(), "finish", "Finish")
+        self.stack.add_titled(HomePage(), "home", "Home")
+        self.stack.add_titled(FilesPage(), "files", "Files")
+        self.stack.add_titled(SettingsPage(), "settings", "Settings")
+        self.stack.add_titled(InstallerPage(), "installer", "Installer")
+        self.stack.add_titled(AdvancedPage(), "advanced", "Advanced")
+        self.stack.add_titled(BuildPage(), "build", "Build")
         
         # Crear un StackSidebar
         sidebar = Gtk.StackSidebar()

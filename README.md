@@ -75,16 +75,15 @@ run.bat
 
 ## Características
 
-- Generador de instaladores con interfaz GTK 4
 - **HeaderBar** con botón Build para generar .lis
 - **Menú** con opciones (About, Settings, Quit)
-- **StackSidebar** con múltiples pasos de configuración:
-  - **Presentation**: Información del proyecto
-  - **License**: Términos y condiciones
-  - **Administrator**: Datos del administrador
-  - **Directories**: Directorios de instalación
-  - **Options**: Componentes y opciones
-  - **Finish**: Resumen y confirmación
+- **StackSidebar** con secciones modulares:
+  - **Home**: Información básica del proyecto (nombre, versión, descripción, icono, licencia, privilegios)
+  - **Files**: Archivos y carpetas a incluir en el instalador
+  - **Settings**: Directorios de instalación y requisitos del sistema
+  - **Installer**: Configuración del instalador (iconos, accesos directos, idiomas)
+  - **Advanced**: Variables de entorno, comandos post-instalación, registro de Windows
+  - **Build**: Vista previa y construcción del archivo .lis
 
 ## Estructura del Proyecto
 
@@ -103,12 +102,12 @@ lis-builder/
 │   └── settings.json   # Configuración del proyecto
 └── pages/              # Módulo de páginas
     ├── __init__.py
-    ├── presentation.py  # Página de presentación
-    ├── license.py      # Página de licencia
-    ├── administrator.py # Página de administrador
-    ├── directories.py  # Página de directorios
-    ├── options.py      # Página de opciones
-    └── finish.py       # Página de finalización
+    ├── home.py         # Información del proyecto
+    ├── files.py        # Archivos a incluir
+    ├── settings.py     # Configuración de directorios y requisitos
+    ├── installer.py    # Configuración del instalador
+    ├── advanced.py     # Opciones avanzadas
+    └── build.py        # Construcción y vista previa
 ```
 
 ## Autor
