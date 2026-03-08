@@ -8,11 +8,10 @@
             "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "pythonPath": "${workspaceFolder}/venv/bin/python3",
+            "cwd": "${workspaceFolder}",
             "env": {
                 "PYTHONPATH": "${workspaceFolder}"
-            },
-            "cwd": "${workspaceFolder}"
+            }
         }
     ]
 }
