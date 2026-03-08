@@ -71,11 +71,11 @@ class HomePage(Gtk.Box):
         form_box.append(license_label)
 
         self.license_combo = Gtk.ComboBoxText()
-        self.license_combo.append_text("MIT")
         self.license_combo.append_text("GPL v3")
+        self.license_combo.append_text("MIT")
         self.license_combo.append_text("Apache 2.0")
         self.license_combo.append_text("BSD")
-        self.license_combo.append_text("Proprietary")
+        self.license_combo.append_text("LGPL v3")
         self.license_combo.set_active(0)
         form_box.append(self.license_combo)
 
@@ -106,12 +106,12 @@ class HomePage(Gtk.Box):
         form_box.append(admin_label)
 
         self.admin_checkbox = Gtk.CheckButton()
-        self.admin_checkbox.set_label("Requiere instalación como administrador")
+        self.admin_checkbox.set_label("Requiere instalación como administrador (sudo)")
         form_box.append(self.admin_checkbox)
 
         # Explicación de privilegios
         admin_desc_label = Gtk.Label()
-        admin_desc_label.set_text("Explicación (por qué necesita administrador):")
+        admin_desc_label.set_text("Explicación (por qué necesita sudo):")
         admin_desc_label.set_halign(Gtk.Align.START)
         form_box.append(admin_desc_label)
 

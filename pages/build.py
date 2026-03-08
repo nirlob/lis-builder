@@ -54,42 +54,41 @@ class BuildPage(Gtk.Box):
 Name=Mi Aplicación
 Version=1.0.0
 Description=Una aplicación de ejemplo
-License=MIT
-RequireAdmin=true
-AdminReason=Necesita acceso al registro de Windows
+License=GPL v3
+RequireAdmin=false
 
 [Files]
-bin/mi_aplicacion.exe
-lib/librerias.dll
+bin/mi_aplicacion
+lib/librerias.so
 config/config.ini
 
 [Directories]
-InstallDir=C:\\Program Files\\Mi Aplicacion
-DataDir=C:\\ProgramData\\Mi Aplicacion
+InstallDir=$HOME/Aplicaciones/MiAplicacion
+DataDir=$HOME/.config/MiAplicacion
 
 [Requirements]
-MinWindows=Windows 10
-DotNet=None
-DiskSpace=100
+MinDistro=Cualquier distribución
+Dependencies=gtk3, libssl
 
 [Installer]
 OutputFile=setup.lis
-InstallerIcon=icon.ico
-CreateShortcuts=true
-CreateStartMenu=true
+InstallerIcon=icon.png
+CreateDesktopShortcut=true
+CreateMenuEntry=true
 RunAfterInstall=false
 CreateUninstaller=true
 Language=Español
 
 [Environment]
-PATH=%INSTALLDIR%\\bin
+PATH=$INSTALLDIR/bin:$PATH
 
 [PostInstall]
-regsvr32 /s %INSTALLDIR%\\bin\\mi_dll.dll
+chmod +x $INSTALLDIR/bin/mi_aplicacion
+ln -sf $INSTALLDIR/bin/mi_aplicacion $HOME/.local/bin/
 
-[Registry]
-HKLM\\SOFTWARE\\MiApp\\Version = "1.0"
-HKCU\\Software\\MiApp\\InstallDir = "%INSTALLDIR%"
+[Configuration]
+.desktop -> /usr/share/applications/
+.service -> $HOME/.config/systemd/user/
 """
         buffer.set_text(preview_content)
 

@@ -57,7 +57,7 @@ class AdvancedPage(Gtk.Box):
         self.env_list.set_selection_mode(Gtk.SelectionMode.MULTIPLE)
 
         # Variables de ejemplo
-        example_env = ["%INSTALLDIR%\\bin", "%INSTALLDIR%\\lib"]
+        example_env = ["$HOME/.local/bin", "$INSTALLDIR/bin"]
         for env_var in example_env:
             row = Gtk.ListBoxRow()
             hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
@@ -117,7 +117,7 @@ class AdvancedPage(Gtk.Box):
         self.post_list.set_selection_mode(Gtk.SelectionMode.MULTIPLE)
 
         # Comandos de ejemplo
-        example_commands = ["regsvr32 /s %INSTALLDIR%\\bin\\mi_dll.dll", "net start \"Mi Servicio\""]
+        example_commands = ["chmod +x $INSTALLDIR/bin/mi_aplicacion", "ln -sf $INSTALLDIR/bin/mi_aplicacion /usr/local/bin/", "update-desktop-database"]
         for cmd in example_commands:
             row = Gtk.ListBoxRow()
             hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
@@ -151,34 +151,34 @@ class AdvancedPage(Gtk.Box):
 
         notebook.append_page(post_tab, Gtk.Label(label="Post-Instalación"))
 
-        # Pestaña 3: Registro de Windows
-        reg_tab = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
-        reg_tab.set_margin_top(20)
-        reg_tab.set_margin_bottom(20)
-        reg_tab.set_margin_start(20)
-        reg_tab.set_margin_end(20)
+        # Pestaña 3: Archivos de configuración
+        config_tab = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
+        config_tab.set_margin_top(20)
+        config_tab.set_margin_bottom(20)
+        config_tab.set_margin_start(20)
+        config_tab.set_margin_end(20)
 
-        reg_title = Gtk.Label()
-        reg_title.set_markup("<b>Registro de Windows</b>")
-        reg_title.set_halign(Gtk.Align.START)
-        reg_tab.append(reg_title)
+        config_title = Gtk.Label()
+        config_title.set_markup("<b>Archivos de Configuración</b>")
+        config_title.set_halign(Gtk.Align.START)
+        config_tab.append(config_title)
 
-        reg_desc = Gtk.Label()
-        reg_desc.set_text("Entradas del registro que se crearán durante la instalación:")
-        reg_desc.set_wrap(True)
-        reg_desc.set_halign(Gtk.Align.START)
-        reg_tab.append(reg_desc)
+        config_desc = Gtk.Label()
+        config_desc.set_text("Archivos de configuración que se crearán durante la instalación:")
+        config_desc.set_wrap(True)
+        config_desc.set_halign(Gtk.Align.START)
+        config_tab.append(config_desc)
 
-        # Lista de entradas de registro
-        reg_scrolled = Gtk.ScrolledWindow()
-        reg_scrolled.set_vexpand(True)
+        # Lista de archivos de configuración
+        config_scrolled = Gtk.ScrolledWindow()
+        config_scrolled.set_vexpand(True)
 
-        self.reg_list = Gtk.ListBox()
-        self.reg_list.set_selection_mode(Gtk.SelectionMode.MULTIPLE)
+        self.config_list = Gtk.ListBox()
+        self.config_list.set_selection_mode(Gtk.SelectionMode.MULTIPLE)
 
-        # Entradas de ejemplo
-        example_reg = ["HKLM\\SOFTWARE\\MiApp\\Version = \"1.0\"", "HKCU\\Software\\MiApp\\InstallDir = \"%INSTALLDIR%\""]
-        for reg_entry in example_reg:
+        # Archivos de ejemplo
+        example_configs = [".desktop -> /usr/share/applications/", ".service -> /usr/lib/systemd/user/", ".conf -> /etc/"]
+        for config_entry in example_configs:
             row = Gtk.ListBoxRow()
             hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
             hbox.set_margin_top(5)
@@ -187,7 +187,7 @@ class AdvancedPage(Gtk.Box):
             hbox.set_margin_end(10)
 
             label = Gtk.Label()
-            label.set_text(reg_entry)
+            label.set_text(config_entry)
             label.set_halign(Gtk.Align.START)
             label.set_hexpand(True)
             hbox.append(label)
@@ -196,19 +196,19 @@ class AdvancedPage(Gtk.Box):
             remove_icon = Gtk.Image()
             remove_icon.set_from_icon_name("user-trash-symbolic")
             remove_button.set_child(remove_icon)
-            remove_button.set_tooltip_text("Remover entrada")
+            remove_button.set_tooltip_text("Remover archivo")
             hbox.append(remove_button)
 
             row.set_child(hbox)
-            self.reg_list.append(row)
+            self.config_list.append(row)
 
-        reg_scrolled.set_child(self.reg_list)
-        reg_tab.append(reg_scrolled)
+        config_scrolled.set_child(self.config_list)
+        config_tab.append(config_scrolled)
 
-        add_reg_button = Gtk.Button(label="Agregar Entrada")
-        add_reg_button.add_css_class("suggested-action")
-        reg_tab.append(add_reg_button)
+        add_config_button = Gtk.Button(label="Agregar Archivo de Configuración")
+        add_config_button.add_css_class("suggested-action")
+        config_tab.append(add_config_button)
 
-        notebook.append_page(reg_tab, Gtk.Label(label="Registro"))
+        notebook.append_page(config_tab, Gtk.Label(label="Configuración"))
 
         self.append(notebook)

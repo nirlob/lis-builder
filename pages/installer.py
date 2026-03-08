@@ -74,12 +74,12 @@ class InstallerPage(Gtk.Box):
         # Crear accesos directos
         self.shortcuts_checkbox = Gtk.CheckButton()
         self.shortcuts_checkbox.set_active(True)
-        self.shortcuts_checkbox.set_label("Crear accesos directos en el escritorio")
+        self.shortcuts_checkbox.set_label("Crear acceso directo en el escritorio")
         form_box.append(self.shortcuts_checkbox)
 
         self.startmenu_checkbox = Gtk.CheckButton()
         self.startmenu_checkbox.set_active(True)
-        self.startmenu_checkbox.set_label("Crear entrada en el menú Inicio")
+        self.startmenu_checkbox.set_label("Crear entrada en el menú de aplicaciones")
         form_box.append(self.startmenu_checkbox)
 
         # Iniciar después de instalar
@@ -91,7 +91,7 @@ class InstallerPage(Gtk.Box):
         # Crear desinstalador
         self.uninstaller_checkbox = Gtk.CheckButton()
         self.uninstaller_checkbox.set_active(True)
-        self.uninstaller_checkbox.set_label("Crear desinstalador")
+        self.uninstaller_checkbox.set_label("Crear script de desinstalación")
         form_box.append(self.uninstaller_checkbox)
 
         # Separador

@@ -37,7 +37,7 @@ class SettingsPage(Gtk.Box):
 
         install_dir_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         self.install_dir_entry = Gtk.Entry()
-        self.install_dir_entry.set_text("C:\\Program Files\\Mi Aplicacion")
+        self.install_dir_entry.set_text("~/Aplicaciones/MiAplicacion")
         self.install_dir_entry.set_hexpand(True)
         install_dir_box.append(self.install_dir_entry)
 
@@ -52,7 +52,7 @@ class SettingsPage(Gtk.Box):
         form_box.append(data_dir_label)
 
         self.data_dir_entry = Gtk.Entry()
-        self.data_dir_entry.set_text("C:\\ProgramData\\Mi Aplicacion")
+        self.data_dir_entry.set_text("~/.config/MiAplicacion")
         form_box.append(self.data_dir_entry)
 
         # Separador
@@ -65,31 +65,28 @@ class SettingsPage(Gtk.Box):
         req_label.set_halign(Gtk.Align.START)
         form_box.append(req_label)
 
-        # Versión mínima de Windows
-        win_version_label = Gtk.Label()
-        win_version_label.set_text("Versión mínima de Windows:")
-        win_version_label.set_halign(Gtk.Align.START)
-        form_box.append(win_version_label)
+        # Versión mínima de distribución Linux
+        distro_label = Gtk.Label()
+        distro_label.set_text("Distribución Linux mínima:")
+        distro_label.set_halign(Gtk.Align.START)
+        form_box.append(distro_label)
 
-        self.win_version_combo = Gtk.ComboBoxText()
-        windows_versions = ["Windows 7", "Windows 8", "Windows 8.1", "Windows 10", "Windows 11"]
-        for version in windows_versions:
-            self.win_version_combo.append_text(version)
-        self.win_version_combo.set_active(3)  # Windows 10 por defecto
-        form_box.append(self.win_version_combo)
+        self.distro_combo = Gtk.ComboBoxText()
+        linux_distros = ["Ubuntu 18.04+", "Ubuntu 20.04+", "Ubuntu 22.04+", "Fedora 30+", "Debian 10+", "Arch Linux", "Cualquier distribución"]
+        for distro in linux_distros:
+            self.distro_combo.append_text(distro)
+        self.distro_combo.set_active(6)  # Cualquier distribución por defecto
+        form_box.append(self.distro_combo)
 
-        # .NET Framework
-        dotnet_label = Gtk.Label()
-        dotnet_label.set_text(".NET Framework mínimo:")
-        dotnet_label.set_halign(Gtk.Align.START)
-        form_box.append(dotnet_label)
+        # Dependencias requeridas
+        deps_label = Gtk.Label()
+        deps_label.set_text("Dependencias del sistema:")
+        deps_label.set_halign(Gtk.Align.START)
+        form_box.append(deps_label)
 
-        self.dotnet_combo = Gtk.ComboBoxText()
-        dotnet_versions = ["Ninguno", ".NET Framework 4.0", ".NET Framework 4.5", ".NET Framework 4.6", ".NET Framework 4.8", ".NET 5.0+", ".NET 6.0+", ".NET 7.0+", ".NET 8.0+"]
-        for version in dotnet_versions:
-            self.dotnet_combo.append_text(version)
-        self.dotnet_combo.set_active(0)  # Ninguno por defecto
-        form_box.append(self.dotnet_combo)
+        self.deps_entry = Gtk.Entry()
+        self.deps_entry.set_placeholder_text("gtk3, libssl, etc. (separadas por comas)")
+        form_box.append(self.deps_entry)
 
         # Espacio requerido
         space_label = Gtk.Label()

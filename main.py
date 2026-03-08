@@ -25,7 +25,7 @@ class MainWindow(Gtk.ApplicationWindow):
         header_bar = Gtk.HeaderBar()
         self.set_titlebar(header_bar)
         
-        # Botón Build (izquierda)
+        # Botón Build (izquierda, antes del menú)
         build_button = Gtk.Button()
         build_icon = Gtk.Image()
         build_icon.set_from_icon_name("system-run-symbolic")

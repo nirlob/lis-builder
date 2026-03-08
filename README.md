@@ -1,6 +1,6 @@
-# LIS Builder - Generador de Instaladores
+# LIS Builder - Generador de Instaladores para Linux
 
-Una aplicación Python con GTK 4 para generar instaladores con extensión `.lis` (similar a .msc de Windows, Inno Setup, NSIS, etc.)
+Una aplicación Python con GTK 4 para generar instaladores `.lis` para aplicaciones Linux (similar a AppImage, pero con instalación completa).
 
 ## Requisitos
 
@@ -78,11 +78,11 @@ run.bat
 - **HeaderBar** con botón Build para generar .lis
 - **Menú** con opciones (About, Settings, Quit)
 - **StackSidebar** con secciones modulares:
-  - **Home**: Información básica del proyecto (nombre, versión, descripción, icono, licencia, privilegios)
+  - **Home**: Información básica del proyecto (nombre, versión, descripción, icono, licencia, privilegios sudo)
   - **Files**: Archivos y carpetas a incluir en el instalador
-  - **Settings**: Directorios de instalación y requisitos del sistema
-  - **Installer**: Configuración del instalador (iconos, accesos directos, idiomas)
-  - **Advanced**: Variables de entorno, comandos post-instalación, registro de Windows
+  - **Settings**: Directorios de instalación (home del usuario) y requisitos del sistema Linux
+  - **Installer**: Configuración del instalador (iconos, accesos directos en escritorio/menú, idiomas)
+  - **Advanced**: Variables de entorno, comandos post-instalación, archivos de configuración del sistema
   - **Build**: Vista previa y construcción del archivo .lis
 
 ## Estructura del Proyecto
