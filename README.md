@@ -24,21 +24,41 @@ pip3 install -r requirements.txt
 
 ## Ejecución
 
-### Primera vez:
+### Configuración inicial (una sola vez)
 
+**macOS/Linux:**
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python3 main.py
 ```
 
-### Próximas veces:
-
-```bash
-source venv/bin/activate
-python3 main.py
+**Windows (PowerShell):**
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 ```
+
+**Windows (CMD):**
+```cmd
+python -m venv venv
+venv\Scripts\activate.bat
+pip install -r requirements.txt
+```
+
+### Ejecutar y Depurar
+
+Una vez configurado el entorno, abre VSCode y presiona **F5** para ejecutar y depurar automáticamente.
+
+- **F5**: Ejecutar y depurar
+- **Ctrl+Shift+D**: Abrir panel de depuración
+- **Clicks en número de línea**: Poner breakpoints
+
+VSCode automáticamente:
+- ✅ Detecta el venv en cualquier SO
+- ✅ Activa el entorno automáticamente
+- ✅ Ejecuta la aplicación en modo depuración
 
 ## Características
 
