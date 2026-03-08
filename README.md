@@ -1,6 +1,6 @@
-# LIS Builder - Instalador
+# LIS Builder - Generador de Instaladores
 
-Una aplicación Python con GTK 4 para instalar LIS (Licensing System) en tu sistema.
+Una aplicación Python con GTK 4 para generar instaladores con extensión `.lis` (similar a .msc de Windows, Inno Setup, NSIS, etc.)
 
 ## Requisitos
 
@@ -75,14 +75,16 @@ run.bat
 
 ## Características
 
-- Instalador con interfaz GTK 4
-- StackSidebar con múltiples pasos de instalación:
-  - **Presentation**: Bienvenida al usuario
-  - **License**: Aceptación de términos
-  - **Administrator**: Configuración del administrador
-  - **Directories**: Selección de directorios de instalación
-  - **Options**: Selección de componentes
-  - **Finish**: Confirmación de completado
+- Generador de instaladores con interfaz GTK 4
+- **HeaderBar** con botón Build para generar .lis
+- **Menú** con opciones (About, Settings, Quit)
+- **StackSidebar** con múltiples pasos de configuración:
+  - **Presentation**: Información del proyecto
+  - **License**: Términos y condiciones
+  - **Administrator**: Datos del administrador
+  - **Directories**: Directorios de instalación
+  - **Options**: Componentes y opciones
+  - **Finish**: Resumen y confirmación
 
 ## Estructura del Proyecto
 

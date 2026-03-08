@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-LIS Builder - Aplicación instaladora con GTK 4
+LIS Builder - Generador de instaladores .lis
 """
 
 import gi
@@ -18,8 +18,36 @@ from pages.finish import FinishPage
 class MainWindow(Gtk.ApplicationWindow):
     def __init__(self, app):
         super().__init__(application=app)
-        self.set_title("LIS Builder - Instalador")
-        self.set_default_size(800, 600)
+        self.set_title("LIS Builder")
+        self.set_default_size(900, 650)
+        
+        # Crear HeaderBar
+        header_bar = Gtk.HeaderBar()
+        self.set_titlebar(header_bar)
+        
+        # Botón Build (izquierda)
+        build_button = Gtk.Button()
+        build_icon = Gtk.Image()
+        build_icon.set_from_icon_name("system-run-symbolic")
+        build_button.set_child(build_icon)
+        build_button.set_tooltip_text("Generar archivo .lis")
+        build_button.connect("clicked", self.on_build_clicked)
+        header_bar.pack_start(build_button)
+        
+        # Menú (derecha)
+        menu_button = Gtk.MenuButton()
+        menu_icon = Gtk.Image()
+        menu_icon.set_from_icon_name("open-menu-symbolic")
+        menu_button.set_child(menu_icon)
+        
+        # Crear menú
+        menu_model = Gio.Menu.new()
+        menu_model.append("About", "app.about")
+        menu_model.append("Settings", "app.settings")
+        menu_model.append("Quit", "app.quit")
+        
+        menu_button.set_menu_model(menu_model)
+        header_bar.pack_end(menu_button)
         
         # Crear un Stack para contener las páginas
         self.stack = Gtk.Stack()
@@ -47,6 +75,11 @@ class MainWindow(Gtk.ApplicationWindow):
         
         # Establecer la caja como contenido de la ventana
         self.set_child(hbox)
+    
+    def on_build_clicked(self, widget):
+        """Generar el archivo .lis"""
+        print("Build clicked - Generando archivo .lis...")
+        # TODO: Implementar generación de .lis
 
 
 class MyApp(Gtk.Application):
