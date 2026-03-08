@@ -40,10 +40,10 @@ class MainWindow(Gtk.ApplicationWindow):
         # Crear una caja horizontal con el sidebar y el stack
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         hbox.append(sidebar)
-        hbox.append(self.stack)
         
         # Hacer que el stack ocupe más espacio
-        hbox.set_child_packing(self.stack, True, True, 0, Gtk.PackType.START)
+        self.stack.set_hexpand(True)
+        hbox.append(self.stack)
         
         # Establecer la caja como contenido de la ventana
         self.set_child(hbox)
