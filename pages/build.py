@@ -1,10 +1,15 @@
 """
-Página Build - Construir y vista previa del instalador
+Build Page - Build and Preview Installer
 """
 
 import gi
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
+
+import gettext
+gettext.bindtextdomain('lis-builder', 'locale')
+gettext.textdomain('lis-builder')
+_ = gettext.gettext
 
 
 class BuildPage(Gtk.Box):
@@ -17,12 +22,12 @@ class BuildPage(Gtk.Box):
 
         # Título
         title = Gtk.Label()
-        title.set_markup("<big><b>Construir Instalador</b></big>")
+        title.set_markup("<big><b>" + _("Build Installer") + "</b></big>")
         self.append(title)
 
         # Descripción
         description = Gtk.Label()
-        description.set_text("Vista previa y construcción del archivo .lis:")
+        description.set_text(_("Preview and build the .lis file:"))
         description.set_wrap(True)
         self.append(description)
 
@@ -35,7 +40,7 @@ class BuildPage(Gtk.Box):
         preview_box.set_hexpand(True)
 
         preview_title = Gtk.Label()
-        preview_title.set_markup("<b>Vista Previa</b>")
+        preview_title.set_markup("<b>" + _("Preview") + "</b>")
         preview_title.set_halign(Gtk.Align.START)
         preview_box.append(preview_title)
 
@@ -51,23 +56,23 @@ class BuildPage(Gtk.Box):
         # Texto de ejemplo de vista previa
         buffer = self.preview_text.get_buffer()
         preview_content = """[LIS Installer Configuration]
-Name=Mi Aplicación
+Name=My Application
 Version=1.0.0
-Description=Una aplicación de ejemplo
+Description=A sample application
 License=GPL v3
 RequireAdmin=false
 
 [Files]
-bin/mi_aplicacion
-lib/librerias.so
+bin/my_application
+lib/libraries.so
 config/config.ini
 
 [Directories]
-InstallDir=$HOME/Aplicaciones/MiAplicacion
-DataDir=$HOME/.config/MiAplicacion
+InstallDir=$HOME/Applications/MyApplication
+DataDir=$HOME/.config/MyApplication
 
 [Requirements]
-MinDistro=Cualquier distribución
+MinDistro=Any distribution
 Dependencies=gtk3, libssl
 
 [Installer]
@@ -77,14 +82,14 @@ CreateDesktopShortcut=true
 CreateMenuEntry=true
 RunAfterInstall=false
 CreateUninstaller=true
-Language=Español
+Language=English
 
 [Environment]
 PATH=$INSTALLDIR/bin:$PATH
 
 [PostInstall]
-chmod +x $INSTALLDIR/bin/mi_aplicacion
-ln -sf $INSTALLDIR/bin/mi_aplicacion $HOME/.local/bin/
+chmod +x $INSTALLDIR/bin/my_application
+ln -sf $INSTALLDIR/bin/my_application $HOME/.local/bin/
 
 [Configuration]
 .desktop -> /usr/share/applications/
@@ -103,12 +108,12 @@ ln -sf $INSTALLDIR/bin/mi_aplicacion $HOME/.local/bin/
         build_box.set_size_request(250, -1)
 
         build_title = Gtk.Label()
-        build_title.set_markup("<b>Opciones de Construcción</b>")
+        build_title.set_markup("<b>" + _("Build Options") + "</b>")
         build_title.set_halign(Gtk.Align.START)
         build_box.append(build_title)
 
         # Botón de actualizar vista previa
-        update_button = Gtk.Button(label="Actualizar Vista Previa")
+        update_button = Gtk.Button(label=_("Update Preview"))
         update_button.add_css_class("suggested-action")
         build_box.append(update_button)
 
@@ -118,23 +123,23 @@ ln -sf $INSTALLDIR/bin/mi_aplicacion $HOME/.local/bin/
 
         # Opciones de validación
         validate_label = Gtk.Label()
-        validate_label.set_text("Validaciones:")
+        validate_label.set_text(_("Validations:"))
         validate_label.set_halign(Gtk.Align.START)
         build_box.append(validate_label)
 
         self.validate_files_checkbox = Gtk.CheckButton()
         self.validate_files_checkbox.set_active(True)
-        self.validate_files_checkbox.set_label("Verificar archivos")
+        self.validate_files_checkbox.set_label(_("Check files"))
         build_box.append(self.validate_files_checkbox)
 
         self.validate_paths_checkbox = Gtk.CheckButton()
         self.validate_paths_checkbox.set_active(True)
-        self.validate_paths_checkbox.set_label("Verificar rutas")
+        self.validate_paths_checkbox.set_label(_("Check paths"))
         build_box.append(self.validate_paths_checkbox)
 
         self.validate_icons_checkbox = Gtk.CheckButton()
         self.validate_icons_checkbox.set_active(True)
-        self.validate_icons_checkbox.set_label("Verificar iconos")
+        self.validate_icons_checkbox.set_label(_("Check icons"))
         build_box.append(self.validate_icons_checkbox)
 
         # Separador
@@ -142,17 +147,44 @@ ln -sf $INSTALLDIR/bin/mi_aplicacion $HOME/.local/bin/
         build_box.append(separator2)
 
         # Botón de construir
-        build_final_button = Gtk.Button(label="Construir .lis")
+        build_final_button = Gtk.Button(label=_("Build .lis"))
         build_final_button.add_css_class("suggested-action")
         build_final_button.set_size_request(-1, 50)
         build_box.append(build_final_button)
 
         # Información de progreso
         self.progress_label = Gtk.Label()
-        self.progress_label.set_text("Listo para construir")
+        self.progress_label.set_text(_("Ready to build"))
         self.progress_label.set_wrap(True)
         build_box.append(self.progress_label)
 
         main_box.append(build_box)
 
         self.append(main_box)
+    
+    def get_data(self):
+        """Obtener configuración de construcción"""
+        return {
+            "validate_files": self.validate_files_checkbox.get_active(),
+            "validate_paths": self.validate_paths_checkbox.get_active(),
+            "validate_icons": self.validate_icons_checkbox.get_active()
+        }
+    
+    def set_data(self, data):
+        """Cargar configuración de construcción"""
+        if "validate_files" in data:
+            self.validate_files_checkbox.set_active(data["validate_files"])
+        if "validate_paths" in data:
+            self.validate_paths_checkbox.set_active(data["validate_paths"])
+        if "validate_icons" in data:
+            self.validate_icons_checkbox.set_active(data["validate_icons"])
+    
+    def clear_data(self):
+        """Limpiar configuración de construcción"""
+        self.validate_files_checkbox.set_active(True)
+        self.validate_paths_checkbox.set_active(True)
+        self.validate_icons_checkbox.set_active(True)
+        # Limpiar vista previa
+        buffer = self.preview_text.get_buffer()
+        buffer.set_text("")
+        self.progress_label.set_text(_("Ready to build"))

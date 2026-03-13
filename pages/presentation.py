@@ -6,6 +6,11 @@ import gi
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
+import gettext
+gettext.bindtextdomain('lis-builder', 'locale')
+gettext.textdomain('lis-builder')
+_ = gettext.gettext
+
 
 class PresentationPage(Gtk.Box):
     def __init__(self):
@@ -17,19 +22,19 @@ class PresentationPage(Gtk.Box):
         
         # Título
         title = Gtk.Label()
-        title.set_markup("<big><b>¡Bienvenido a LIS Builder!</b></big>")
+        title.set_markup("<big><b>" + _("Welcome to LIS Builder!") + "</b></big>")
         self.append(title)
         
         # Descripción
         description = Gtk.Label()
-        description.set_text("Este instalador te guiará a través de los pasos necesarios para instalar LIS.")
+        description.set_text(_("This installer will guide you through the necessary steps to install LIS."))
         description.set_wrap(True)
         description.set_justify(Gtk.Justification.CENTER)
         self.append(description)
         
         # Información adicional
         info = Gtk.Label()
-        info.set_markup("<small>Asegúrate de tener los permisos necesarios antes de continuar.</small>")
+        info.set_markup("<small>" + _("Make sure you have the necessary permissions before continuing.") + "</small>")
         info.set_wrap(True)
         self.append(info)
         

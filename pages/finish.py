@@ -6,6 +6,11 @@ import gi
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
+import gettext
+gettext.bindtextdomain('lis-builder', 'locale')
+gettext.textdomain('lis-builder')
+_ = gettext.gettext
+
 
 class FinishPage(Gtk.Box):
     def __init__(self):
@@ -28,20 +33,20 @@ class FinishPage(Gtk.Box):
         
         # Título
         title = Gtk.Label()
-        title.set_markup("<big><b>¡Instalación Completada!</b></big>")
+        title.set_markup("<big><b>" + _("Installation Completed!") + "</b></big>")
         title.set_halign(Gtk.Align.CENTER)
         self.append(title)
         
         # Mensaje
         message = Gtk.Label()
-        message.set_text("LIS ha sido instalado exitosamente en tu sistema.")
+        message.set_text(_("LIS has been successfully installed on your system."))
         message.set_wrap(True)
         message.set_justify(Gtk.Justification.CENTER)
         self.append(message)
         
         # Información adicional
         info = Gtk.Label()
-        info.set_markup("<small>Puedes encontrar la aplicación en el menú de aplicaciones o ejecutar 'lis' desde la terminal.</small>")
+        info.set_markup("<small>" + _("You can find the application in the applications menu or run 'lis' from the terminal.") + "</small>")
         info.set_wrap(True)
         info.set_justify(Gtk.Justification.CENTER)
         self.append(info)
@@ -52,6 +57,6 @@ class FinishPage(Gtk.Box):
         self.append(spacer_bottom)
         
         # Botón de finalización
-        finish_button = Gtk.Button(label="Finalizar")
+        finish_button = Gtk.Button(label=_("Finish"))
         finish_button.add_css_class("suggested-action")
         self.append(finish_button)

@@ -1,10 +1,15 @@
 """
-Página Advanced - Opciones avanzadas
+Advanced Page - Advanced Options
 """
 
 import gi
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
+
+import gettext
+gettext.bindtextdomain('lis-builder', 'locale')
+gettext.textdomain('lis-builder')
+_ = gettext.gettext
 
 
 class AdvancedPage(Gtk.Box):
@@ -17,12 +22,12 @@ class AdvancedPage(Gtk.Box):
 
         # Título
         title = Gtk.Label()
-        title.set_markup("<big><b>Opciones Avanzadas</b></big>")
+        title.set_markup("<big><b>" + _("Advanced Options") + "</b></big>")
         self.append(title)
 
         # Descripción
         description = Gtk.Label()
-        description.set_text("Configuraciones avanzadas para usuarios experimentados:")
+        description.set_text(_("Advanced configurations for experienced users:"))
         description.set_wrap(True)
         self.append(description)
 
@@ -39,12 +44,12 @@ class AdvancedPage(Gtk.Box):
         env_tab.set_margin_end(20)
 
         env_title = Gtk.Label()
-        env_title.set_markup("<b>Variables de Entorno</b>")
+        env_title.set_markup("<b>" + _("Environment Variables") + "</b>")
         env_title.set_halign(Gtk.Align.START)
         env_tab.append(env_title)
 
         env_desc = Gtk.Label()
-        env_desc.set_text("Variables que se agregarán al PATH del sistema:")
+        env_desc.set_text(_("Variables that will be added to the system PATH:"))
         env_desc.set_wrap(True)
         env_desc.set_halign(Gtk.Align.START)
         env_tab.append(env_desc)
@@ -85,11 +90,11 @@ class AdvancedPage(Gtk.Box):
         env_scrolled.set_child(self.env_list)
         env_tab.append(env_scrolled)
 
-        add_env_button = Gtk.Button(label="Agregar Variable")
+        add_env_button = Gtk.Button(label=_("Add Variable"))
         add_env_button.add_css_class("suggested-action")
         env_tab.append(add_env_button)
 
-        notebook.append_page(env_tab, Gtk.Label(label="Variables"))
+        notebook.append_page(env_tab, Gtk.Label(label=_("Variables")))
 
         # Pestaña 2: Comandos post-instalación
         post_tab = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
@@ -99,12 +104,12 @@ class AdvancedPage(Gtk.Box):
         post_tab.set_margin_end(20)
 
         post_title = Gtk.Label()
-        post_title.set_markup("<b>Comandos Post-Instalación</b>")
+        post_title.set_markup("<b>" + _("Post-Installation Commands") + "</b>")
         post_title.set_halign(Gtk.Align.START)
         post_tab.append(post_title)
 
         post_desc = Gtk.Label()
-        post_desc.set_text("Comandos que se ejecutarán después de la instalación:")
+        post_desc.set_text(_("Commands that will be executed after installation:"))
         post_desc.set_wrap(True)
         post_desc.set_halign(Gtk.Align.START)
         post_tab.append(post_desc)
@@ -117,7 +122,7 @@ class AdvancedPage(Gtk.Box):
         self.post_list.set_selection_mode(Gtk.SelectionMode.MULTIPLE)
 
         # Comandos de ejemplo
-        example_commands = ["chmod +x $INSTALLDIR/bin/mi_aplicacion", "ln -sf $INSTALLDIR/bin/mi_aplicacion /usr/local/bin/", "update-desktop-database"]
+        example_commands = ["chmod +x $INSTALLDIR/bin/my_application", "ln -sf $INSTALLDIR/bin/my_application $HOME/.local/bin/", "update-desktop-database"]
         for cmd in example_commands:
             row = Gtk.ListBoxRow()
             hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
@@ -136,7 +141,7 @@ class AdvancedPage(Gtk.Box):
             remove_icon = Gtk.Image()
             remove_icon.set_from_icon_name("user-trash-symbolic")
             remove_button.set_child(remove_icon)
-            remove_button.set_tooltip_text("Remover comando")
+            remove_button.set_tooltip_text(_("Remove command"))
             hbox.append(remove_button)
 
             row.set_child(hbox)
@@ -145,11 +150,11 @@ class AdvancedPage(Gtk.Box):
         post_scrolled.set_child(self.post_list)
         post_tab.append(post_scrolled)
 
-        add_post_button = Gtk.Button(label="Agregar Comando")
+        add_post_button = Gtk.Button(label=_("Add Command"))
         add_post_button.add_css_class("suggested-action")
         post_tab.append(add_post_button)
 
-        notebook.append_page(post_tab, Gtk.Label(label="Post-Instalación"))
+        notebook.append_page(post_tab, Gtk.Label(label=_("Post-Installation")))
 
         # Pestaña 3: Archivos de configuración
         config_tab = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
@@ -159,12 +164,12 @@ class AdvancedPage(Gtk.Box):
         config_tab.set_margin_end(20)
 
         config_title = Gtk.Label()
-        config_title.set_markup("<b>Archivos de Configuración</b>")
+        config_title.set_markup("<b>" + _("Configuration Files") + "</b>")
         config_title.set_halign(Gtk.Align.START)
         config_tab.append(config_title)
 
         config_desc = Gtk.Label()
-        config_desc.set_text("Archivos de configuración que se crearán durante la instalación:")
+        config_desc.set_text(_("Configuration files that will be created during installation:"))
         config_desc.set_wrap(True)
         config_desc.set_halign(Gtk.Align.START)
         config_tab.append(config_desc)
@@ -177,7 +182,7 @@ class AdvancedPage(Gtk.Box):
         self.config_list.set_selection_mode(Gtk.SelectionMode.MULTIPLE)
 
         # Archivos de ejemplo
-        example_configs = [".desktop -> /usr/share/applications/", ".service -> /usr/lib/systemd/user/", ".conf -> /etc/"]
+        example_configs = [".desktop -> /usr/share/applications/", ".service -> $HOME/.config/systemd/user/", ".conf -> /etc/"]
         for config_entry in example_configs:
             row = Gtk.ListBoxRow()
             hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
@@ -196,7 +201,7 @@ class AdvancedPage(Gtk.Box):
             remove_icon = Gtk.Image()
             remove_icon.set_from_icon_name("user-trash-symbolic")
             remove_button.set_child(remove_icon)
-            remove_button.set_tooltip_text("Remover archivo")
+            remove_button.set_tooltip_text(_("Remove file"))
             hbox.append(remove_button)
 
             row.set_child(hbox)
@@ -205,10 +210,86 @@ class AdvancedPage(Gtk.Box):
         config_scrolled.set_child(self.config_list)
         config_tab.append(config_scrolled)
 
-        add_config_button = Gtk.Button(label="Agregar Archivo de Configuración")
+        add_config_button = Gtk.Button(label=_("Add Configuration File"))
         add_config_button.add_css_class("suggested-action")
         config_tab.append(add_config_button)
 
-        notebook.append_page(config_tab, Gtk.Label(label="Configuración"))
+        notebook.append_page(config_tab, Gtk.Label(label=_("Configuration")))
 
         self.append(notebook)
+    
+    def get_data(self):
+        """Obtener datos avanzados"""
+        return {
+            "environment_vars": self.get_list_data(self.env_list),
+            "post_install_commands": self.get_list_data(self.post_list),
+            "config_files": self.get_list_data(self.config_list)
+        }
+    
+    def set_data(self, data):
+        """Cargar datos avanzados"""
+        if "environment_vars" in data and isinstance(data["environment_vars"], list):
+            self.set_list_data(self.env_list, data["environment_vars"])
+        if "post_install_commands" in data and isinstance(data["post_install_commands"], list):
+            self.set_list_data(self.post_list, data["post_install_commands"])
+        if "config_files" in data and isinstance(data["config_files"], list):
+            self.set_list_data(self.config_list, data["config_files"])
+    
+    def clear_data(self):
+        """Limpiar datos avanzados"""
+        self.clear_list(self.env_list)
+        self.clear_list(self.post_list)
+        self.clear_list(self.config_list)
+    
+    def get_list_data(self, listbox):
+        """Obtener datos de una lista"""
+        items = []
+        row = listbox.get_first_child()
+        while row is not None:
+            if isinstance(row, Gtk.ListBoxRow):
+                hbox = row.get_child()
+                if isinstance(hbox, Gtk.Box):
+                    child = hbox.get_first_child()
+                    if isinstance(child, Gtk.Label):
+                        items.append(child.get_text())
+            row = row.get_next_sibling()
+        return items
+    
+    def set_list_data(self, listbox, data):
+        """Cargar datos en una lista"""
+        self.clear_list(listbox)
+        for item in data:
+            self.add_list_item(listbox, item)
+    
+    def clear_list(self, listbox):
+        """Limpiar una lista"""
+        while True:
+            row = listbox.get_first_child()
+            if row is None:
+                break
+            listbox.remove(row)
+    
+    def add_list_item(self, listbox, text):
+        """Agregar un elemento a una lista"""
+        row = Gtk.ListBoxRow()
+        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        hbox.set_margin_top(5)
+        hbox.set_margin_bottom(5)
+        hbox.set_margin_start(10)
+        hbox.set_margin_end(10)
+
+        label = Gtk.Label()
+        label.set_text(text)
+        label.set_halign(Gtk.Align.START)
+        label.set_hexpand(True)
+        hbox.append(label)
+
+        remove_button = Gtk.Button()
+        remove_icon = Gtk.Image()
+        remove_icon.set_from_icon_name("user-trash-symbolic")
+        remove_button.set_child(remove_icon)
+        remove_button.set_tooltip_text("Remover")
+        hbox.append(remove_button)
+
+        row.set_child(hbox)
+        listbox.append(row)

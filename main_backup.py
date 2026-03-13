@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-LIS Builder - Linux Installer Script Builder
+LIS Builder - Generador de instaladores .lis
 """
 
 import gi
@@ -16,18 +16,12 @@ from pages.build import BuildPage
 
 import json
 import os
-import gettext
-
-# Setup internationalization
-gettext.bindtextdomain('lis-builder', os.path.join(os.path.dirname(__file__), 'locale'))
-gettext.textdomain('lis-builder')
-_ = gettext.gettext
 
 
 class MainWindow(Gtk.ApplicationWindow):
     def __init__(self, app):
         super().__init__(application=app)
-        self.set_title(_("LIS Builder"))
+        self.set_title("LIS Builder")
         self.set_default_size(900, 650)
         
         # Estado del proyecto
@@ -38,31 +32,41 @@ class MainWindow(Gtk.ApplicationWindow):
         header_bar = Gtk.HeaderBar()
         self.set_titlebar(header_bar)
         
-        # Menú (izquierda)
+        # Botón Build (izquierda)
+        build_button = Gtk.Button()
+        build_icon = Gtk.Image()
+        build_icon.set_from_icon_name("system-run-symbolic")
+        build_button.set_child(build_icon)
+        build_button.set_tooltip_text("Generar archivo .lis")
+        build_button.connect("clicked", self.on_build_clicked)
+        header_bar.pack_start(build_button)
+        
+        # Menú (derecha)
         menu_button = Gtk.MenuButton()
         menu_icon = Gtk.Image()
         menu_icon.set_from_icon_name("open-menu-symbolic")
         menu_button.set_child(menu_icon)
         
-        # Crear menú plano
+        # Crear menú
         menu_model = Gio.Menu.new()
-        menu_model.append(_("New Project"), "app.new")
-        menu_model.append(_("Open Project..."), "app.open")
-        menu_model.append(_("Save Project"), "app.save")
-        menu_model.append(_("Save Project As..."), "app.save_as")
-        menu_model.append(_("Quit"), "app.quit")
+        
+        # Submenú File
+        file_menu = Gio.Menu.new()
+        file_menu.append("New", "app.new")
+        file_menu.append("Open...", "app.open")
+        file_menu.append("Save", "app.save")
+        file_menu.append("Save As...", "app.save_as")
+        # No hay separador en GTK 4, se puede usar un item vacío o simplemente omitirlo
+        file_menu.append("Quit", "app.quit")
+        menu_model.append_submenu("File", file_menu)
+        
+        # Submenú Help
+        help_menu = Gio.Menu.new()
+        help_menu.append("About", "app.about")
+        menu_model.append_submenu("Help", help_menu)
         
         menu_button.set_menu_model(menu_model)
         header_bar.pack_end(menu_button)
-        
-        # Botón Build (derecha)
-        build_button = Gtk.Button()
-        build_icon = Gtk.Image()
-        build_icon.set_from_icon_name("system-run-symbolic")
-        build_button.set_child(build_icon)
-        build_button.set_tooltip_text(_("Build .lis file"))
-        build_button.connect("clicked", self.on_build_clicked)
-        header_bar.pack_end(build_button)
         
         # Crear un Stack para contener las páginas
         self.stack = Gtk.Stack()
@@ -77,12 +81,12 @@ class MainWindow(Gtk.ApplicationWindow):
         self.build_page = BuildPage()
         
         # Agregar las páginas al stack
-        self.stack.add_titled(self.home_page, "home", _("Home"))
-        self.stack.add_titled(self.files_page, "files", _("Files"))
-        self.stack.add_titled(self.settings_page, "settings", _("Settings"))
-        self.stack.add_titled(self.installer_page, "installer", _("Installer"))
-        self.stack.add_titled(self.advanced_page, "advanced", _("Advanced"))
-        self.stack.add_titled(self.build_page, "build", _("Build"))
+        self.stack.add_titled(self.home_page, "home", "Home")
+        self.stack.add_titled(self.files_page, "files", "Files")
+        self.stack.add_titled(self.settings_page, "settings", "Settings")
+        self.stack.add_titled(self.installer_page, "installer", "Installer")
+        self.stack.add_titled(self.advanced_page, "advanced", "Advanced")
+        self.stack.add_titled(self.build_page, "build", "Build")
         
         # Crear un StackSidebar
         sidebar = Gtk.StackSidebar()
@@ -105,7 +109,7 @@ class MainWindow(Gtk.ApplicationWindow):
         # TODO: Implementar generación de .lis
     
     def on_new_project(self):
-        """Create a new project"""
+        """Crear un nuevo proyecto"""
         # Limpiar datos actuales
         self.current_project_file = None
         self.project_data = {}
@@ -129,22 +133,22 @@ class MainWindow(Gtk.ApplicationWindow):
         self.update_title()
     
     def on_open_project(self):
-        """Open existing project"""
+        """Abrir un proyecto existente"""
         dialog = Gtk.FileChooserDialog(
-            title=_("Open Project"),
+            title="Abrir proyecto",
             action=Gtk.FileChooserAction.OPEN,
             buttons=("_Cancel", Gtk.ResponseType.CANCEL, "_Open", Gtk.ResponseType.ACCEPT)
         )
         
         # Filtro para archivos .lisproject
         filter_lis = Gtk.FileFilter()
-        filter_lis.set_name(_("LIS Project files (*.lisproject)"))
+        filter_lis.set_name("LIS Project files")
         filter_lis.add_pattern("*.lisproject")
         dialog.add_filter(filter_lis)
         
         # Filtro para todos los archivos
         filter_all = Gtk.FileFilter()
-        filter_all.set_name(_("All files"))
+        filter_all.set_name("All files")
         filter_all.add_pattern("*")
         dialog.add_filter(filter_all)
         
@@ -159,28 +163,28 @@ class MainWindow(Gtk.ApplicationWindow):
         dialog.destroy()
     
     def on_save_project(self):
-        """Save current project"""
+        """Guardar el proyecto actual"""
         if self.current_project_file:
             self.save_project(self.current_project_file)
         else:
             self.on_save_as_project()
     
     def on_save_as_project(self):
-        """Save project with name"""
+        """Guardar el proyecto con nombre"""
         dialog = Gtk.FileChooserDialog(
-            title=_("Save Project"),
+            title="Guardar proyecto",
             action=Gtk.FileChooserAction.SAVE,
             buttons=("_Cancel", Gtk.ResponseType.CANCEL, "_Save", Gtk.ResponseType.ACCEPT)
         )
         
         # Establecer nombre por defecto
-        dialog.set_current_name("my_project.lisproject")
+        dialog.set_current_name("mi_proyecto.lisproject")
         
         dialog.connect("response", self.on_save_response)
         dialog.present()
     
     def on_save_response(self, dialog, response):
-        """Handle save dialog response"""
+        """Manejar respuesta del diálogo de guardar"""
         if response == Gtk.ResponseType.ACCEPT:
             filename = dialog.get_file().get_path()
             # Asegurar extensión .lisproject
@@ -190,7 +194,7 @@ class MainWindow(Gtk.ApplicationWindow):
         dialog.destroy()
     
     def collect_project_data(self):
-        """Collect data from all pages"""
+        """Recopilar datos de todas las páginas"""
         data = {}
         
         # Crear diccionario de páginas por nombre
@@ -211,7 +215,7 @@ class MainWindow(Gtk.ApplicationWindow):
         return data
     
     def load_project_data(self, data):
-        """Load data into all pages"""
+        """Cargar datos en todas las páginas"""
         # Crear diccionario de páginas por nombre
         self.pages = {
             "home": self.home_page,
@@ -256,12 +260,12 @@ class MainWindow(Gtk.ApplicationWindow):
             print(f"Error al cargar proyecto: {e}")
     
     def update_title(self):
-        """Update window title with project name"""
+        """Actualizar el título de la ventana con el nombre del proyecto"""
         if self.current_project_file:
             basename = os.path.basename(self.current_project_file)
             self.set_title(f"LIS Builder - {basename}")
         else:
-            self.set_title(_("LIS Builder"))
+            self.set_title("LIS Builder")
 
 
 class MyApp(Gtk.Application):
@@ -302,13 +306,6 @@ class MyApp(Gtk.Application):
         about_action = Gio.SimpleAction.new("about", None)
         about_action.connect("activate", self.on_about)
         self.add_action(about_action)
-        
-        # Configurar aceleradores
-        self.set_accels_for_action("app.new", ["<Ctrl>N"])
-        self.set_accels_for_action("app.open", ["<Ctrl>O"])
-        self.set_accels_for_action("app.save", ["<Ctrl>S"])
-        self.set_accels_for_action("app.save_as", ["<Ctrl><Shift>S"])
-        self.set_accels_for_action("app.quit", ["<Ctrl>Q"])
     
     def on_new(self, action, parameter):
         """Nuevo proyecto"""
@@ -335,11 +332,11 @@ class MyApp(Gtk.Application):
         self.quit()
     
     def on_about(self, action, parameter):
-        """Show About dialog"""
+        """Mostrar diálogo About"""
         dialog = Gtk.AboutDialog()
         dialog.set_program_name("LIS Builder")
         dialog.set_version("1.0.0")
-        dialog.set_comments(_("Linux Installer Script Builder"))
+        dialog.set_comments("Generador de instaladores .lis para Linux")
         dialog.set_website("https://github.com/lis/builder")
         dialog.set_authors(["Jose"])
         dialog.present()

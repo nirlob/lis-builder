@@ -6,6 +6,11 @@ import gi
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
+import gettext
+gettext.bindtextdomain('lis-builder', 'locale')
+gettext.textdomain('lis-builder')
+_ = gettext.gettext
+
 
 class DirectoriesPage(Gtk.Box):
     def __init__(self):
@@ -17,18 +22,18 @@ class DirectoriesPage(Gtk.Box):
         
         # Título
         title = Gtk.Label()
-        title.set_markup("<big><b>Seleccionar Directorios de Instalación</b></big>")
+        title.set_markup("<big><b>" + _("Select Installation Directories") + "</b></big>")
         self.append(title)
         
         # Descripción
         description = Gtk.Label()
-        description.set_text("Especifica dónde deseas instalar los componentes:")
+        description.set_text(_("Specify where you want to install the components:"))
         description.set_wrap(True)
         self.append(description)
         
         # Directorio principal
         main_dir_label = Gtk.Label()
-        main_dir_label.set_text("Directorio de instalación:")
+        main_dir_label.set_text(_("Installation directory:"))
         main_dir_label.set_halign(Gtk.Align.START)
         self.append(main_dir_label)
         
@@ -38,13 +43,13 @@ class DirectoriesPage(Gtk.Box):
         main_dir_entry.set_hexpand(True)
         main_dir_box.append(main_dir_entry)
         
-        browse_button = Gtk.Button(label="Examinar")
+        browse_button = Gtk.Button(label=_("Browse"))
         main_dir_box.append(browse_button)
         self.append(main_dir_box)
         
         # Directorio de datos
         data_dir_label = Gtk.Label()
-        data_dir_label.set_text("Directorio de datos:")
+        data_dir_label.set_text(_("Data directory:"))
         data_dir_label.set_halign(Gtk.Align.START)
         self.append(data_dir_label)
         
@@ -54,7 +59,7 @@ class DirectoriesPage(Gtk.Box):
         
         # Directorio de configuración
         config_dir_label = Gtk.Label()
-        config_dir_label.set_text("Directorio de configuración:")
+        config_dir_label.set_text(_("Configuration directory:"))
         config_dir_label.set_halign(Gtk.Align.START)
         self.append(config_dir_label)
         

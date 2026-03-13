@@ -6,6 +6,11 @@ import gi
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
+import gettext
+gettext.bindtextdomain('lis-builder', 'locale')
+gettext.textdomain('lis-builder')
+_ = gettext.gettext
+
 
 class AdministratorPage(Gtk.Box):
     def __init__(self):
@@ -17,12 +22,12 @@ class AdministratorPage(Gtk.Box):
         
         # Título
         title = Gtk.Label()
-        title.set_markup("<big><b>Configuración del Administrador</b></big>")
+        title.set_markup("<big><b>" + _("Administrator Configuration") + "</b></big>")
         self.append(title)
         
         # Descripción
         description = Gtk.Label()
-        description.set_text("Ingresa los datos del administrador del sistema:")
+        description.set_text(_("Enter the system administrator data:"))
         description.set_wrap(True)
         self.append(description)
         
@@ -31,33 +36,33 @@ class AdministratorPage(Gtk.Box):
         
         # Usuario
         user_label = Gtk.Label()
-        user_label.set_text("Usuario:")
+        user_label.set_text(_("User:"))
         user_label.set_halign(Gtk.Align.START)
         form_box.append(user_label)
         
         user_entry = Gtk.Entry()
-        user_entry.set_placeholder_text("Nombre del administrador")
+        user_entry.set_placeholder_text(_("Administrator name"))
         form_box.append(user_entry)
         
         # Contraseña
         password_label = Gtk.Label()
-        password_label.set_text("Contraseña:")
+        password_label.set_text(_("Password:"))
         password_label.set_halign(Gtk.Align.START)
         form_box.append(password_label)
         
         password_entry = Gtk.Entry()
-        password_entry.set_placeholder_text("Contraseña")
+        password_entry.set_placeholder_text(_("Password"))
         password_entry.set_visibility(False)
         form_box.append(password_entry)
         
         # Email
         email_label = Gtk.Label()
-        email_label.set_text("Email:")
+        email_label.set_text(_("Email:"))
         email_label.set_halign(Gtk.Align.START)
         form_box.append(email_label)
         
         email_entry = Gtk.Entry()
-        email_entry.set_placeholder_text("correo@ejemplo.com")
+        email_entry.set_placeholder_text("email@example.com")
         form_box.append(email_entry)
         
         self.append(form_box)

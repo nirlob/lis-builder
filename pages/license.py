@@ -6,6 +6,11 @@ import gi
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
+import gettext
+gettext.bindtextdomain('lis-builder', 'locale')
+gettext.textdomain('lis-builder')
+_ = gettext.gettext
+
 
 class LicensePage(Gtk.Box):
     def __init__(self):
@@ -17,7 +22,7 @@ class LicensePage(Gtk.Box):
         
         # Título
         title = Gtk.Label()
-        title.set_markup("<big><b>Acuerdo de Licencia</b></big>")
+        title.set_markup("<big><b>" + _("License Agreement") + "</b></big>")
         self.append(title)
         
         # Crear un scrolled window para el texto de la licencia
@@ -59,6 +64,6 @@ SOFTWARE.""")
         # Checkbox para aceptar
         accept_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         checkbox = Gtk.CheckButton()
-        checkbox.set_label("Aceptar el acuerdo de licencia")
+        checkbox.set_label(_("Accept the license agreement"))
         accept_box.append(checkbox)
         self.append(accept_box)
