@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run LIS Builder (macOS/Linux)",
+            "type": "shell",
+            "command": "bash",
+            "args": ["run.sh"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "osx": {
+                "isBackground": false
+            },
+            "linux": {
+                "isBackground": false
+            }
+        },
+        {
+            "label": "Run LIS Builder (Windows)",
+            "type": "shell",
+            "command": "cmd",
+            "args": ["/c", "run.bat"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "windows": {
+                "isBackground": false
+            }
+        }
+    ]
+}

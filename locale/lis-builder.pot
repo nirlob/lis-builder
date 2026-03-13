@@ -1,0 +1,507 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-08 04:59+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.py:30 main.py:264
+msgid "LIS Builder"
+msgstr ""
+
+#: main.py:49
+msgid "New Project"
+msgstr ""
+
+#: main.py:50
+msgid "Open Project..."
+msgstr ""
+
+#: main.py:51 main.py:171
+msgid "Save Project"
+msgstr ""
+
+#: main.py:52
+msgid "Save Project As..."
+msgstr ""
+
+#: main.py:53
+msgid "Quit"
+msgstr ""
+
+#: main.py:63
+msgid "Build .lis file"
+msgstr ""
+
+#: main.py:80
+msgid "Home"
+msgstr ""
+
+#: main.py:81
+msgid "Files"
+msgstr ""
+
+#: main.py:82
+msgid "Settings"
+msgstr ""
+
+#: main.py:83
+msgid "Installer"
+msgstr ""
+
+#: main.py:84
+msgid "Advanced"
+msgstr ""
+
+#: main.py:85
+msgid "Build"
+msgstr ""
+
+#: main.py:134
+msgid "Open Project"
+msgstr ""
+
+#: main.py:141
+msgid "LIS Project files (*.lisproject)"
+msgstr ""
+
+#: main.py:147
+msgid "All files"
+msgstr ""
+
+#: main.py:335
+msgid "Linux Installer Script Builder"
+msgstr ""
+
+#: pages/administrator.py:25
+msgid "Administrator Configuration"
+msgstr ""
+
+#: pages/administrator.py:30
+msgid "Enter the system administrator data:"
+msgstr ""
+
+#: pages/administrator.py:39
+msgid "User:"
+msgstr ""
+
+#: pages/administrator.py:44
+msgid "Administrator name"
+msgstr ""
+
+#: pages/administrator.py:49
+msgid "Password:"
+msgstr ""
+
+#: pages/administrator.py:54
+msgid "Password"
+msgstr ""
+
+#: pages/administrator.py:60
+msgid "Email:"
+msgstr ""
+
+#: pages/advanced.py:25
+msgid "Advanced Options"
+msgstr ""
+
+#: pages/advanced.py:30
+msgid "Advanced configurations for experienced users:"
+msgstr ""
+
+#: pages/advanced.py:47
+msgid "Environment Variables"
+msgstr ""
+
+#: pages/advanced.py:52
+msgid "Variables that will be added to the system PATH:"
+msgstr ""
+
+#: pages/advanced.py:93
+msgid "Add Variable"
+msgstr ""
+
+#: pages/advanced.py:97
+msgid "Variables"
+msgstr ""
+
+#: pages/advanced.py:107
+msgid "Post-Installation Commands"
+msgstr ""
+
+#: pages/advanced.py:112
+msgid "Commands that will be executed after installation:"
+msgstr ""
+
+#: pages/advanced.py:144
+msgid "Remove command"
+msgstr ""
+
+#: pages/advanced.py:153
+msgid "Add Command"
+msgstr ""
+
+#: pages/advanced.py:157
+msgid "Post-Installation"
+msgstr ""
+
+#: pages/advanced.py:167
+msgid "Configuration Files"
+msgstr ""
+
+#: pages/advanced.py:172
+msgid "Configuration files that will be created during installation:"
+msgstr ""
+
+#: pages/advanced.py:204 pages/files.py:75 pages/files.py:160
+msgid "Remove file"
+msgstr ""
+
+#: pages/advanced.py:213
+msgid "Add Configuration File"
+msgstr ""
+
+#: pages/advanced.py:217
+msgid "Configuration"
+msgstr ""
+
+#: pages/build.py:25
+msgid "Build Installer"
+msgstr ""
+
+#: pages/build.py:30
+msgid "Preview and build the .lis file:"
+msgstr ""
+
+#: pages/build.py:43
+msgid "Preview"
+msgstr ""
+
+#: pages/build.py:111
+msgid "Build Options"
+msgstr ""
+
+#: pages/build.py:116
+msgid "Update Preview"
+msgstr ""
+
+#: pages/build.py:126
+msgid "Validations:"
+msgstr ""
+
+#: pages/build.py:132
+msgid "Check files"
+msgstr ""
+
+#: pages/build.py:137
+msgid "Check paths"
+msgstr ""
+
+#: pages/build.py:142
+msgid "Check icons"
+msgstr ""
+
+#: pages/build.py:150
+msgid "Build .lis"
+msgstr ""
+
+#: pages/build.py:157 pages/build.py:190
+msgid "Ready to build"
+msgstr ""
+
+#: pages/directories.py:25
+msgid "Select Installation Directories"
+msgstr ""
+
+#: pages/directories.py:30
+msgid "Specify where you want to install the components:"
+msgstr ""
+
+#: pages/directories.py:36
+msgid "Installation directory:"
+msgstr ""
+
+#: pages/directories.py:46 pages/home.py:99 pages/installer.py:65
+#: pages/settings.py:49
+msgid "Browse"
+msgstr ""
+
+#: pages/directories.py:52
+msgid "Data directory:"
+msgstr ""
+
+#: pages/directories.py:62
+msgid "Configuration directory:"
+msgstr ""
+
+#: pages/files.py:25
+msgid "Project Files"
+msgstr ""
+
+#: pages/files.py:30
+msgid "Select the files and folders to include in the installer:"
+msgstr ""
+
+#: pages/files.py:36
+msgid "Included Files:"
+msgstr ""
+
+#: pages/files.py:87
+msgid "Add File"
+msgstr ""
+
+#: pages/files.py:91
+msgid "Add Folder"
+msgstr ""
+
+#: pages/files.py:94
+msgid "Clear All"
+msgstr ""
+
+#: pages/files.py:102
+msgid ""
+"Files will be copied to the installation directory specified in Settings."
+msgstr ""
+
+#: pages/finish.py:36
+msgid "Installation Completed!"
+msgstr ""
+
+#: pages/finish.py:42
+msgid "LIS has been successfully installed on your system."
+msgstr ""
+
+#: pages/finish.py:49
+msgid ""
+"You can find the application in the applications menu or run 'lis' from the "
+"terminal."
+msgstr ""
+
+#: pages/finish.py:60
+msgid "Finish"
+msgstr ""
+
+#: pages/home.py:25
+msgid "Project Information"
+msgstr ""
+
+#: pages/home.py:30
+msgid "Configure basic information for your application:"
+msgstr ""
+
+#: pages/home.py:39
+msgid "Application Name:"
+msgstr ""
+
+#: pages/home.py:44
+msgid "My Application"
+msgstr ""
+
+#: pages/home.py:49
+msgid "Version:"
+msgstr ""
+
+#: pages/home.py:59
+msgid "Description:"
+msgstr ""
+
+#: pages/home.py:74
+msgid "License:"
+msgstr ""
+
+#: pages/home.py:89
+msgid "Application Icon:"
+msgstr ""
+
+#: pages/home.py:95
+msgid "Path to .ico or .png file"
+msgstr ""
+
+#: pages/home.py:109
+msgid "Administrator Privileges"
+msgstr ""
+
+#: pages/home.py:114
+msgid "Requires administrator installation (sudo)"
+msgstr ""
+
+#: pages/home.py:119
+msgid "Explanation (why sudo is needed):"
+msgstr ""
+
+#: pages/installer.py:25
+msgid "Installer Configuration"
+msgstr ""
+
+#: pages/installer.py:30
+msgid "Customize the installer behavior and appearance:"
+msgstr ""
+
+#: pages/installer.py:39
+msgid ".lis File Name:"
+msgstr ""
+
+#: pages/installer.py:55
+msgid "Installer Icon:"
+msgstr ""
+
+#: pages/installer.py:61
+msgid "Path to .ico file"
+msgstr ""
+
+#: pages/installer.py:75
+msgid "Installer Options"
+msgstr ""
+
+#: pages/installer.py:82 pages/options.py:77
+msgid "Create desktop shortcut"
+msgstr ""
+
+#: pages/installer.py:87
+msgid "Create application menu entry"
+msgstr ""
+
+#: pages/installer.py:93
+msgid "Run application after installation"
+msgstr ""
+
+#: pages/installer.py:99
+msgid "Create uninstaller script"
+msgstr ""
+
+#: pages/installer.py:108
+msgid "Supported Languages:"
+msgstr ""
+
+#: pages/installer.py:113
+msgid "Spanish"
+msgstr ""
+
+#: pages/installer.py:113
+msgid "English"
+msgstr ""
+
+#: pages/installer.py:113
+msgid "French"
+msgstr ""
+
+#: pages/installer.py:113
+msgid "German"
+msgstr ""
+
+#: pages/installer.py:113
+msgid "Italian"
+msgstr ""
+
+#: pages/installer.py:113
+msgid "Portuguese"
+msgstr ""
+
+#: pages/license.py:25
+msgid "License Agreement"
+msgstr ""
+
+#: pages/license.py:67
+msgid "Accept the license agreement"
+msgstr ""
+
+#: pages/options.py:25
+msgid "Installation Options"
+msgstr ""
+
+#: pages/options.py:30
+msgid "Select the components you want to install:"
+msgstr ""
+
+#: pages/options.py:36
+msgid "Components:"
+msgstr ""
+
+#: pages/options.py:43
+msgid "Core (Required)"
+msgstr ""
+
+#: pages/options.py:49
+msgid "Tools"
+msgstr ""
+
+#: pages/options.py:55
+msgid "Documentation"
+msgstr ""
+
+#: pages/options.py:61
+msgid "Examples"
+msgstr ""
+
+#: pages/options.py:70
+msgid "Additional options:"
+msgstr ""
+
+#: pages/options.py:83
+msgid "Start on system boot"
+msgstr ""
+
+#: pages/presentation.py:25
+msgid "Welcome to LIS Builder!"
+msgstr ""
+
+#: pages/presentation.py:30
+msgid ""
+"This installer will guide you through the necessary steps to install LIS."
+msgstr ""
+
+#: pages/presentation.py:37
+msgid "Make sure you have the necessary permissions before continuing."
+msgstr ""
+
+#: pages/settings.py:25
+msgid "Installer Settings"
+msgstr ""
+
+#: pages/settings.py:30
+msgid "Configure installation directories and system requirements:"
+msgstr ""
+
+#: pages/settings.py:39
+msgid "Default Installation Directory:"
+msgstr ""
+
+#: pages/settings.py:55
+msgid "Data Directory:"
+msgstr ""
+
+#: pages/settings.py:69
+msgid "System Requirements"
+msgstr ""
+
+#: pages/settings.py:75
+msgid "Minimum Linux Distribution:"
+msgstr ""
+
+#: pages/settings.py:80
+msgid "Any distribution"
+msgstr ""
+
+#: pages/settings.py:88
+msgid "System Dependencies:"
+msgstr ""
+
+#: pages/settings.py:93
+msgid "gtk3, libssl, etc. (comma separated)"
+msgstr ""
+
+#: pages/settings.py:98
+msgid "Required Disk Space (MB):"
+msgstr ""
