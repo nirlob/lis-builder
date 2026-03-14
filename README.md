@@ -33,27 +33,13 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**Windows (PowerShell):**
-```powershell
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-```
-
-**Windows (CMD):**
-```cmd
-python -m venv venv
-venv\Scripts\activate.bat
-pip install -r requirements.txt
-```
-
 ### Ejecutar desde VSCode
 
 Presiona **F5** para ejecutar y depurar automáticamente (funciona en cualquier SO).
 
 VSCode automáticamente:
 - ✅ Detecta el venv
-- ✅ Ejecuta mediante `launcher.py` (compatible con Windows, macOS y Linux)
+- ✅ Ejecuta mediante `main.py` (macOS y Linux)
 - ✅ Abre en modo depuración
 
 ### Ejecutar manualmente desde terminal
@@ -61,16 +47,6 @@ VSCode automáticamente:
 **macOS/Linux:**
 ```bash
 ./run.sh
-```
-
-**Windows (CMD):**
-```cmd
-run.bat
-```
-
-**Windows (PowerShell):**
-```powershell
-.\run.bat
 ```
 
 ## Características
@@ -90,9 +66,7 @@ run.bat
 ```
 lis-builder/
 ├── main.py              # Aplicación principal
-├── launcher.py          # Script universal para ejecutar en todos los SO
 ├── run.sh              # Script para ejecutar en macOS/Linux
-├── run.bat             # Script para ejecutar en Windows
 ├── requirements.txt    # Dependencias
 ├── README.md           # Este archivo
 ├── .gitignore          # Archivos a ignorar en Git

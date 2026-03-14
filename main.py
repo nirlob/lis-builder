@@ -84,18 +84,59 @@ class MainWindow(Gtk.ApplicationWindow):
         self.stack.add_titled(self.advanced_page, "advanced", _("Advanced"))
         self.stack.add_titled(self.build_page, "build", _("Build"))
         
-        # Crear un StackSidebar
-        sidebar = Gtk.StackSidebar()
-        sidebar.set_stack(self.stack)
-        
+        # Crear sidebar personalizado con iconos
+        sidebar = Gtk.ListBox()
+        sidebar.set_selection_mode(Gtk.SelectionMode.SINGLE)
+        sidebar.set_vexpand(True)
+
+        # Definir las páginas del sidebar (nombre de la página, texto y nombre del icono)
+        sidebar_pages = [
+            ("home",      _("Home"),      "user-home-symbolic"),
+            ("files",     _("Files"),     "folder-symbolic"),
+            ("settings",  _("Settings"),  "emblem-system-symbolic"),
+            ("installer", _("Installer"), "system-run-symbolic"),
+            ("advanced",  _("Advanced"),  "system-search-symbolic"),
+            ("build",     _("Build"),     "system-run-symbolic"),
+        ]
+
+        for name, title, icon in sidebar_pages:
+            row = Gtk.ListBoxRow()
+            row.set_activatable(True)
+            row.page_name = name
+
+            box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+            box.set_margin_top(6)
+            box.set_margin_bottom(6)
+            box.set_margin_start(8)
+            box.set_margin_end(8)
+
+            img = Gtk.Image.new_from_icon_name(icon)
+            lbl = Gtk.Label(label=title, xalign=0)
+
+            box.append(img)
+            box.append(lbl)
+            row.set_child(box)
+            sidebar.append(row)
+
+        sidebar.connect("row-activated", self.on_sidebar_row_activated)
+
+        # Mantener referencia para sincronización de selección
+        self.sidebar = sidebar
+
+        # Seleccionar la primera página inicialmente
+        self.sidebar.select_row(self.sidebar.get_row_at_index(0))
+
+        # Mantener el sidebar en sincronía con la página visible
+        self.stack.connect("notify::visible-child", self.on_stack_visible_child_changed)
+
         # Crear una caja horizontal con el sidebar y el stack
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         hbox.append(sidebar)
-        
+
         # Hacer que el stack ocupe más espacio
         self.stack.set_hexpand(True)
         hbox.append(self.stack)
-        
+
         # Establecer la caja como contenido de la ventana
         self.set_child(hbox)
     
@@ -103,6 +144,22 @@ class MainWindow(Gtk.ApplicationWindow):
         """Generar el archivo .lis"""
         print("Build clicked - Generando archivo .lis...")
         # TODO: Implementar generación de .lis
+
+    def on_sidebar_row_activated(self, listbox, row):
+        """Cambiar la página visible cuando se selecciona una fila del sidebar."""
+        if hasattr(row, "page_name"):
+            self.stack.set_visible_child_name(row.page_name)
+
+    def on_stack_visible_child_changed(self, stack, _):
+        """Sincronizar la selección del sidebar cuando cambia la página visible."""
+        current_name = stack.get_visible_child_name()
+        if not current_name or not hasattr(self, "sidebar"):
+            return
+
+        for row in self.sidebar.get_children():
+            if getattr(row, "page_name", None) == current_name:
+                self.sidebar.select_row(row)
+                break
     
     def on_new_project(self):
         """Create a new project"""
